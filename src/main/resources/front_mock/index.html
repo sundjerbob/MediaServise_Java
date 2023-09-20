@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>File Upload</title>
+</head>
+<body>
+<h1>File Upload</h1>
+<input id="fileInput" type="file">
+<input id="bucketName" placeholder="Bucket Name" type="text">
+<input id="objectName" placeholder="Object Name" type="text">
+<button id="uploadButton">Upload File</button>
+
+<script>
+    document.getElementById("uploadButton").addEventListener("click", function () {
+        const fileInput = document.getElementById("fileInput");
+        const bucketName = document.getElementById("bucketName").value;
+        const objectName = document.getElementById("objectName").value;
+
+        // Check if a file is selected
+        if (fileInput.files.length === 0) {
+            alert("Please select a file.");
+            return;
+        }
+
+        // Create a FormData object
+        const formData = new FormData();
+
+        // Append the file to the FormData object
+        formData.append("file", fileInput.files[0]);
+
+        // Append the bucketName and objectName as text fields
+        formData.append("bucketName", bucketName);
+        formData.append("objectName", objectName);
+
+        // Make a POST request to the API
+        fetch("http://localhost:8080/media/uploadToBucket", {
+            method: "POST",
+            body: formData
+        })
+            .then(
+                response.json().then(result => {
+                    if (result === true) {
+                        alert("File uploaded successfully.");
+                    } else {
+                        alert("File upload failed.");
+                    }
+                })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("File upload failed.");
+                    }));
+    });
+</script>
+</body>
+</html>
