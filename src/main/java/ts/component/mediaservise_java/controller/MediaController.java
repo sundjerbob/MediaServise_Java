@@ -31,6 +31,7 @@ public class MediaController {
             @RequestParam MultipartFile file,
             @RequestParam String bucketName,
             @RequestParam String objectName
+
     ) {
         try {
             if (!file.isEmpty()) {

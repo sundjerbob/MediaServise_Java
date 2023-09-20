@@ -15,10 +15,12 @@ public class CorsConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:63342")); // Allow requests from any origin
+        configuration.setAllowedOrigins(Arrays.asList("*")); // Allow requests from any origin
         configuration.setAllowedMethods(Arrays.asList("*")); // Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
         configuration.setAllowedHeaders(Arrays.asList("*")); // Allow all headers
-        configuration.setAllowCredentials(true); // Allow cookies and credentials
+
+        //TODO: OVO PRSNJAVAAAAAAAAAAAAAAAAA
+        //configuration.setAllowCredentials(true); // Allow cookies and credentials
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration); // Apply CORS rules to all paths
@@ -28,7 +30,6 @@ public class CorsConfig {
 
     @Bean
     public CorsFilter corsFilter() {
-        CorsFilter corsFilter = new CorsFilter(corsConfigurationSource());
-        return corsFilter;
+        return new CorsFilter(corsConfigurationSource());
     }
 }

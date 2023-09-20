@@ -8,8 +8,8 @@
 <body>
 <h1>File Upload</h1>
 <input id="fileInput" type="file">
-<input id="bucketName" placeholder="Bucket Name" type="text">
-<input id="objectName" placeholder="Object Name" type="text">
+<label for="bucketName"></label><input id="bucketName" placeholder="Bucket Name" type="text">
+<label for="objectName"></label><input id="objectName" placeholder="Object Name" type="text">
 <button id="uploadButton">Upload File</button>
 
 <script>
@@ -34,24 +34,24 @@
         formData.append("bucketName", bucketName);
         formData.append("objectName", objectName);
 
-        // Make a POST request to the API
+        // Make a POST request to the API without CORS headers
         fetch("http://localhost:8080/media/uploadToBucket", {
             method: "POST",
-            body: formData
+            body: formData,
         })
-            .then(
-                response.json().then(result => {
-                    if (result === true) {
-                        alert("File uploaded successfully.");
-                    } else {
-                        alert("File upload failed.");
-                    }
-                })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        alert("File upload failed.");
-                    }));
+            .then(response => {
+                if (response.ok) {
+                    alert("File uploaded successfully.");
+                } else {
+                    alert("File upload failed.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("File upload failed.");
+            });
     });
 </script>
+
 </body>
 </html>
