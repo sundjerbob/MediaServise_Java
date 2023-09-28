@@ -16,7 +16,6 @@ public class BucketController {
     public BucketController(MediaService bucketService) {
         this.bucketService = bucketService;
     }
-
     @GetMapping("/list")
     public List<String> listBuckets() {
         return bucketService.getAllBuckets();
