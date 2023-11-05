@@ -49,11 +49,9 @@ public class MediaController {
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed");
                 }
             } else {
-                System.out.println("MAJMUNNNNNNNNNNNNNN");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Empty file");
             }
         } catch (Exception e) {
-            System.out.println("KITULJKO");
 
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed");
